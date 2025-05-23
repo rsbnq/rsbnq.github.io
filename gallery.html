@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Ridhi Sidhi Banquet</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 25px; /* Spacing between grid items */
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            border: 1px solid var(--secondary-grey);
+            border-radius: 8px;
+            overflow: hidden; /* Ensures image corners are rounded with parent */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px; /* Fixed height for consistent grid look */
+            object-fit: cover; /* Crops images to fit without distortion */
+            display: block;
+        }
+
+        .gallery-item p {
+            padding: 15px;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: var(--primary-text-dark);
+            background-color: var(--primary-bg);
+        }
+
+        /* Responsive adjustments for gallery */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                gap: 15px;
+            }
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="container section">
+        <h1 class="text-center">Moments Captured: Ridhi Sidhi Banquet Event Gallery</h1>
+        <p class="text-center">Explore the elegance and versatility of our beautiful halls through a curated selection of moments captured during various celebrations and events. From grand weddings to intimate gatherings, witness how Ridhi Sidhi Banquet transforms into your dream venue.</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Grand+Wedding+Setup" alt="Grand Wedding Reception Setup at Ridhi Sidhi Banquet">
+                <p>Grand Wedding Reception</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Birthday+Celebration" alt="Vibrant Birthday Party at Ridhi Sidhi Banquet">
+                <p>Vibrant Birthday Celebration</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Engagement+Ceremony" alt="Elegant Engagement Ceremony Decor">
+                <p>Elegant Engagement Ceremony</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Corporate+Event" alt="Professional Corporate Event Setup">
+                <p>Professional Corporate Meet</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Stage+Decor" alt="Beautiful Stage Decoration for events">
+                <p>Beautiful Stage Decor</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Dining+Area" alt="Spacious Dining Area Setup">
+                <p>Spacious Dining Setup</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Entrance+View" alt="Welcoming Entrance to Ridhi Sidhi Banquet">
+                <p>Welcoming Entrance</p>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/400x300/E0DED1/333333?text=Hall+Interior" alt="Interior View of Ridhi Sidhi Banquet Hall">
+                <p>Hall Interior View</p>
+            </div>
+            </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p><strong>Ridhi Sidhi Banquet</strong></p>
+            <p>117/2, Block C, Bangur Avenue, Kolkata, West Bengal - 700055</p>
+            <p>Phone: <a href="tel:+919681104488">+91 9681104488</a></p>
+            <p>Email: <a href="mailto:info@ridhisidhibanquet.com">info@ridhisidhibanquet.com</a></p>
+            <p><small>Strategically located on VIP roadside near Bank of India & Domino's Pizza, Bangur Avenue.</small></p>
+            <p>&copy; 2024 Ridhi Sidhi Banquet. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

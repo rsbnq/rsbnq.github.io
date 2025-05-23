@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridhi Sidhi Banquet - Bangur Avenue, Kolkata</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the Hero Section on the Homepage */
+        .hero-section {
+            width: 100%;
+            height: 600px; /* Adjust as needed */
+            background-image: url('https://via.placeholder.com/1920x800/E0DED1/333333?text=Grand+Banquet+Hall+in+Kolkata'); /* Placeholder - REPLACE WITH ACTUAL IMAGE */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: var(--primary-bg); /* Text color for hero overlay */
+            text-align: center;
+        }
+
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Add some padding */
+        }
+
+        .hero-overlay h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: var(--primary-bg); /* Ensure heading text is light */
+            line-height: 1.1;
+        }
+
+        .hero-overlay p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            color: var(--primary-bg); /* Ensure paragraph text is light */
+            max-width: 800px;
+        }
+
+        /* Responsive adjustments for hero section */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 450px;
+            }
+            .hero-overlay h1 {
+                font-size: 2.5em;
+            }
+            .hero-overlay p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                height: 350px;
+            }
+            .hero-overlay h1 {
+                font-size: 1.8em;
+            }
+            .hero-overlay p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-overlay">
+            <h1>Ridhi Sidhi Banquet: Celebrate Life's Milestones in Grandeur</h1>
+            <p>Experience Unforgettable Moments in the Heart of Bangur Avenue, Kolkata.</p>
+            <a href="contact.html" class="button">Plan Your Perfect Event</a>
+        </div>
+    </div>
+
+    <div class="container section text-center">
+        <h2>Welcome to Ridhi Sidhi Banquet – Your Celebration Starts Here</h2>
+        <p>Nestled in the vibrant **Bangur Avenue of Kolkata**, Ridhi Sidhi Banquet offers a serene, elegant, and fully air-conditioned space perfect for making your special moments truly unforgettable. Our spacious halls are designed to host a wide array of events, from grand weddings and vibrant receptions to joyful birthday parties, anniversaries, and professional corporate gatherings. We are dedicated to providing a stress-free experience, ensuring every detail of your celebration is handled with care and precision.</p>
+    </div>
+
+    <div class="container section">
+        <h2 class="text-center">Why Choose Ridhi Sidhi for Your Special Day?</h2>
+        <ul>
+            <li><strong>Spacious Hall Capacity:</strong> Our flexible venue can comfortably accommodate up to 350-450 guests (floating) and seat up to 270, with two modern banquet halls adaptable to your event size.</li>
+            <li><strong>Strategic Location:</strong> Conveniently situated on **VIP roadside in Bangur Avenue, Kolkata**, ensuring easy access for all your guests, near landmarks like Bank of India and Domino's Pizza.</li>
+            <li><strong>Comprehensive Services:</strong> Enjoy seamless event management with our in-house catering (multi-cuisine, veg & non-veg options), elegant decoration services, and modern audio-visual equipment.</li>
+            <li><strong>Dedicated Support Team:</strong> Our experienced professionals are committed to assisting you from initial planning to flawless execution, ensuring your vision comes to life.</li>
+            <li><strong>Ample Parking & Amenities:</strong> Benefit from private parking for 30-40 cars (valet service available), reliable power backup (Generator), and two complimentary dressing/rest rooms.</li>
+        </ul>
+        <div class="text-center">
+            <a href="services.html" class="button">Discover Our Services</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p><strong>Ridhi Sidhi Banquet</strong></p>
+            <p>117/2, Block C, Bangur Avenue, Kolkata, West Bengal - 700055</p>
+            <p>Phone: <a href="tel:+919681104488">+91 9681104488</a></p>
+            <p>Email: <a href="mailto:info@ridhisidhibanquet.com">info@ridhisidhibanquet.com</a></p>
+            <p><small>Strategically located on VIP roadside near Bank of India & Domino's Pizza, Bangur Avenue.</small></p>
+            <p>&copy; 2024 Ridhi Sidhi Banquet. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ridhi Sidhi Banquet</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for Contact Page */
+        .contact-info {
+            margin-bottom: 40px;
+            background-color: #FFFFFF;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact-info h2 {
+            color: var(--accent-gold-hover);
+            margin-top: 0;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .contact-info a {
+            color: var(--primary-text-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px; /* Increased height for better map visibility */
+            margin-bottom: 40px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            overflow: hidden; /* Ensures map corners are rounded */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-form {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .contact-form h2 {
+            color: var(--accent-gold-hover);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-text-dark);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="tel"],
+        .contact-form input[type="email"],
+        .contact-form input[type="date"],
+        .contact-form input[type="number"],
+        .contact-form textarea {
+            width: calc(100% - 22px); /* Account for padding */
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #D0D0D0;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1em;
+            color: var(--primary-text-dark);
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .contact-form textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 100px;
+        }
+
+        .contact-form .button {
+            width: auto; /* Buttons might be wider than 100% otherwise */
+            display: block;
+            text-align: center;
+            margin: 20px auto 0; /* Center button */
+        }
+
+        .form-disclaimer {
+            background-color: #FFFBE6; /* Light yellow for warning */
+            border: 1px solid #FFD700; /* Gold border */
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 5px;
+            color: #8B8000; /* Darker yellow text */
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .form-disclaimer strong {
+            color: #B8860B;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="container section">
+        <h1 class="text-center">Connect With Us – Plan Your Event at Ridhi Sidhi</h1>
+        <p class="text-center">We'd love to hear from you! Whether you're planning a wedding, a birthday celebration, or a corporate event, our team at Ridhi Sidhi Banquet in Bangur Avenue, Kolkata, is ready to assist you. Reach out to us for inquiries, bookings, or to schedule a personal visit to our beautiful venue.</p>
+
+        <div class="contact-info">
+            <h2>Get in Touch Directly</h2>
+            <p><strong>Address:</strong> 117/2, Block C, Bangur Avenue, Kolkata, West Bengal - 700055</p>
+            <p><strong>Phone (For immediate inquiries):</strong> <a href="tel:+919681104488" style="font-size: 1.2em; font-weight: bold;">+91 9681104488</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@ridhisidhibanquet.com">info@ridhisidhibanquet.com</a> (Please replace with actual email address)</p>
+        </div>
+
+        <div class="map-container">
+            <h2 class="text-center" style="margin-top: 0; padding-top: 15px;">Find Us on the Map</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.0039600000004!2d88.4116812!3d22.6186851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027581b0a70195%3A0x7d0a2731885b51a5!2sRidhi%20Sidhi%20Banquet%20Hall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <small class="text-center" style="display: block; padding: 10px;">Strategically located on VIP roadside near Bank of India & Domino's Pizza, Bangur Avenue.</small>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <p class="form-disclaimer">
+                <strong>Important:</strong> This is a static form and does not send emails directly. For immediate inquiries or bookings, please call us at <strong>+91 9681104488</strong> or email us at <strong>info@ridhisidhibanquet.com</strong>.
+            </p>
+            <form action="#" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required>
+
+                <label for="occasion">Type of Occasion:</label>
+                <input type="text" id="occasion" name="occasion">
+
+                <label for="date">Preferred Date of Event:</label>
+                <input type="date" id="date" name="date">
+
+                <label for="guests">Number of Guests:</label>
+                <input type="number" id="guests" name="guests" min="1">
+
+                <label for="message">Your Message (Optional):</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+
+                <button type="submit" class="button">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p><strong>Ridhi Sidhi Banquet</strong></p>
+            <p>117/2, Block C, Bangur Avenue, Kolkata, West Bengal - 700055</p>
+            <p>Phone: <a href="tel:+919681104488">+91 9681104488</a></p>
+            <p>Email: <a href="mailto:info@ridhisidhibanquet.com">info@ridhisidhibanquet.com</a></p>
+            <p><small>Strategically located on VIP roadside near Bank of India & Domino's Pizza, Bangur Avenue.</small></p>
+            <p>&copy; 2024 Ridhi Sidhi Banquet. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

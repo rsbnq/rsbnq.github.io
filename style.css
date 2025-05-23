@@ -1,0 +1,136 @@
+/* style.css */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+/* CSS Custom Properties (Variables) */
+:root {
+    --primary-bg: #F5F5DC; /* Calm Cream/Subtle Beige */
+    --primary-text-dark: #2C3E50; /* Kolkata Charcoal/Deep Indigo */
+    --accent-gold: #DAA520; /* Bengali Gold/Ochre */
+    --accent-gold-hover: #B8860B; /* Slightly darker gold for hover */
+    --secondary-grey: #7F8C8D;
+}
+
+/* Global Body Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--primary-text-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: var(--primary-bg); /* Set primary background for the whole page */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-text-dark);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+
+/* Container for content */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--primary-text-dark);
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: var(--primary-bg);
+    text-align: center;
+    padding: 18px 25px; /* Increased padding for better click area */
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: var(--accent-gold);
+    color: var(--primary-text-dark);
+}
+
+/* Button Styles */
+.button {
+    display: inline-block;
+    background-color: var(--accent-gold);
+    color: var(--primary-text-dark); /* Ensure text color is dark for contrast */
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--accent-gold-hover);
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--primary-text-dark);
+    color: var(--primary-bg);
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+    font-size: 0.9em;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: var(--primary-bg);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--accent-gold);
+}
+
+/* Basic Responsive Image Styles */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Removes extra space below images */
+}
+
+/* Section Spacing (optional, can be added as needed) */
+.section {
+    padding: 60px 0; /* More vertical padding for sections */
+}
+.section:last-child {
+    border-bottom: none;
+}
+
+/* General text alignment utility */
+.text-center {
+    text-align: center;
+}
