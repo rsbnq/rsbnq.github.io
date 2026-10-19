@@ -27,7 +27,7 @@ const hi: Dict = {
     title: 'शादी, रिसेप्शन और पारिवारिक समारोहों के लिए बांगुर एवेन्यू का बैंक्वेट हॉल',
     line: 'वीआईपी रोड पर दो मंज़िलों पर एसी हॉल, 300 मेहमानों तक, भरोसेमंद केटरर और डेकोरेटर के साथ।',
     ask: 'अपनी तारीख़ पूछें',
-    photoAlt: 'रात में फूलों से सजा Ridhi Sidhi Banquet का प्रवेश द्वार',
+    photoAlt: 'Ridhi Sidhi Banquet का नया सामने का हिस्सा, दिन में, शादी के लिए फूलों और पर्दों से सजा प्रवेश द्वार',
   },
 
   ribbon: [
@@ -51,7 +51,7 @@ const hi: Dict = {
     {
       name: 'रिसेप्शन',
       detail: 'सजा हुआ स्टेज और दो मंज़िलों पर 300 मेहमानों तक की जगह।',
-      photo: '02-stages/02-reception-stage-with-floral-arch.jpg',
+      photo: '02-stages/00-white-sofa-stage-with-rose-garlands.jpg',
       page: 'weddings',
     },
     {
@@ -63,7 +63,7 @@ const hi: Dict = {
     {
       name: 'जन्मदिन',
       detail: 'गुब्बारों का आर्च, थीम वाला स्टेज और बुफ़े, पहले जन्मदिन से लेकर हर ख़ास साल तक।',
-      photo: '02-stages/06-birthday-stage-with-flower-arch.jpg',
+      photo: '02-stages/00-first-birthday-balloon-backdrop.jpg',
       page: 'birthdays',
     },
     {
@@ -218,9 +218,9 @@ const hi: Dict = {
       ],
       photos: [
         '03-mandaps-and-canopies/02-red-and-yellow-mandap.jpg',
-        '02-stages/01-wedding-stage-with-anthurium-backdrop.jpg',
+        '02-stages/00-peach-drape-stage-with-floral-canopy.jpg',
+        '01-entrance-and-exterior/00-renovated-entrance-lit-for-an-evening-event.jpg',
         '03-mandaps-and-canopies/00-floral-arch-inside-the-hall.jpg',
-        '01-entrance-and-exterior/02-entrance-lit-for-a-wedding-night.jpg',
       ],
       faqs: [
         { q: 'शादी में कितने मेहमान आ सकते हैं?', a: 'दोनों मंज़िलों पर 300 तक, या एक मंज़िल पर लगभग 150।' },
@@ -249,9 +249,10 @@ const hi: Dict = {
         'लिफ़्ट से दादा-दादी आसानी से पहली मंज़िल तक पहुँचते हैं।',
       ],
       photos: [
-        '02-stages/06-birthday-stage-with-flower-arch.jpg',
-        '01-entrance-and-exterior/05-balloon-arch-for-a-birthday.jpg',
-        '04-halls-and-dining/04-hall-set-for-a-birthday-party.jpg',
+        '02-stages/00-first-birthday-balloon-backdrop.jpg',
+        '01-entrance-and-exterior/00-pink-balloon-arch-at-the-entrance.jpg',
+        '02-stages/00-pink-balloon-birthday-backdrop.jpg',
+        '02-stages/00-seventieth-birthday-sequin-backdrop.jpg',
       ],
       faqs: [
         { q: 'क्या छोटे जन्मदिन के लिए सिर्फ़ एक मंज़िल बुक कर सकते हैं?', a: 'हाँ, हर मंज़िल पर लगभग 150 मेहमान आ सकते हैं।' },

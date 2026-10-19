@@ -6,7 +6,7 @@ import { t, occasionKeys, occasionRoutes } from '../../i18n';
 export const getStaticPaths = (() => {
   const d = t('en');
   const pages = [
-    { page: 'home', title: 'Banquet hall for weddings, receptions and family celebrations', photo: '01-entrance-and-exterior/00-entrance-decorated-with-flowers.jpg' },
+    { page: 'home', title: 'Banquet hall for weddings, receptions and family celebrations', photo: '01-entrance-and-exterior/00-renovated-front-by-day.jpg' },
     { page: 'services', title: d.services.title, photo: '04-halls-and-dining/01-hall-with-stage-set-up.jpg' },
     { page: 'gallery', title: 'Photos of weddings, receptions and events', photo: '02-stages/00-heart-stage-with-white-sofa.jpg' },
     { page: 'contact', title: 'Check your date on WhatsApp', photo: '01-entrance-and-exterior/02-entrance-lit-for-a-wedding-night.jpg' },

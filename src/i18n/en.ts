@@ -27,7 +27,7 @@ const en = {
     title: 'A banquet hall in Bangur Avenue for weddings, receptions and family celebrations',
     line: 'Air-conditioned halls on two floors for up to 300 guests on VIP Road, with trusted caterers and decorators we work with.',
     ask: 'Ask about your date',
-    photoAlt: 'The Ridhi Sidhi Banquet entrance at night, framed with flowers for a wedding',
+    photoAlt: 'The renovated front of Ridhi Sidhi Banquet by day, with a flower and drape entrance for a wedding',
   },
 
   ribbon: [
@@ -52,7 +52,7 @@ const en = {
     {
       name: 'Reception',
       detail: 'A decorated stage and room for up to 300 guests across two floors.',
-      photo: '02-stages/02-reception-stage-with-floral-arch.jpg',
+      photo: '02-stages/00-white-sofa-stage-with-rose-garlands.jpg',
       page: 'weddings',
     },
     {
@@ -64,7 +64,7 @@ const en = {
     {
       name: 'Birthday',
       detail: 'Balloon arches, a themed stage and a buffet, from first birthdays to milestones.',
-      photo: '02-stages/06-birthday-stage-with-flower-arch.jpg',
+      photo: '02-stages/00-first-birthday-balloon-backdrop.jpg',
       page: 'birthdays',
     },
     {
@@ -220,9 +220,9 @@ const en = {
       ],
       photos: [
         '03-mandaps-and-canopies/02-red-and-yellow-mandap.jpg',
-        '02-stages/01-wedding-stage-with-anthurium-backdrop.jpg',
+        '02-stages/00-peach-drape-stage-with-floral-canopy.jpg',
+        '01-entrance-and-exterior/00-renovated-entrance-lit-for-an-evening-event.jpg',
         '03-mandaps-and-canopies/00-floral-arch-inside-the-hall.jpg',
-        '01-entrance-and-exterior/02-entrance-lit-for-a-wedding-night.jpg',
       ],
       faqs: [
         { q: 'How many wedding guests can the banquet hold?', a: 'Up to 300 across both floors, or about 150 if you use one floor.' },
@@ -251,9 +251,10 @@ const en = {
         'The lift helps grandparents reach the first floor.',
       ],
       photos: [
-        '02-stages/06-birthday-stage-with-flower-arch.jpg',
-        '01-entrance-and-exterior/05-balloon-arch-for-a-birthday.jpg',
-        '04-halls-and-dining/04-hall-set-for-a-birthday-party.jpg',
+        '02-stages/00-first-birthday-balloon-backdrop.jpg',
+        '01-entrance-and-exterior/00-pink-balloon-arch-at-the-entrance.jpg',
+        '02-stages/00-pink-balloon-birthday-backdrop.jpg',
+        '02-stages/00-seventieth-birthday-sequin-backdrop.jpg',
       ],
       faqs: [
         { q: 'Can we book just one floor for a smaller birthday?', a: 'Yes, each floor holds about 150 guests.' },

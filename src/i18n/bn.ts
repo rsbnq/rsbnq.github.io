@@ -27,7 +27,7 @@ const bn: Dict = {
     title: 'বিয়ে, রিসেপশন ও পারিবারিক অনুষ্ঠানের জন্য বাঙ্গুর অ্যাভিনিউর ব্যাঙ্কোয়েট হল',
     line: 'ভিআইপি রোডে দুই তলায় শীতাতপ নিয়ন্ত্রিত হল, ৩০০ জন অতিথি পর্যন্ত, বিশ্বস্ত ক্যাটারার ও ডেকরেটরদের সঙ্গে।',
     ask: 'আপনার তারিখ জিজ্ঞেস করুন',
-    photoAlt: 'রাতে ফুলে সাজানো Ridhi Sidhi Banquet-এর প্রবেশপথ',
+    photoAlt: 'Ridhi Sidhi Banquet-এর নতুন সামনের অংশ, দিনের আলোয়, বিয়ের জন্য ফুল ও পর্দায় সাজানো প্রবেশপথ',
   },
 
   ribbon: [
@@ -51,7 +51,7 @@ const bn: Dict = {
     {
       name: 'রিসেপশন বা বউভাত',
       detail: 'সাজানো মঞ্চ আর দুই তলা মিলিয়ে ৩০০ জন অতিথির জায়গা।',
-      photo: '02-stages/02-reception-stage-with-floral-arch.jpg',
+      photo: '02-stages/00-white-sofa-stage-with-rose-garlands.jpg',
       page: 'weddings',
     },
     {
@@ -63,7 +63,7 @@ const bn: Dict = {
     {
       name: 'জন্মদিন',
       detail: 'বেলুনের তোরণ, থিম অনুযায়ী মঞ্চ আর বুফে, প্রথম জন্মদিন থেকে বিশেষ সব বছর।',
-      photo: '02-stages/06-birthday-stage-with-flower-arch.jpg',
+      photo: '02-stages/00-first-birthday-balloon-backdrop.jpg',
       page: 'birthdays',
     },
     {
@@ -218,9 +218,9 @@ const bn: Dict = {
       ],
       photos: [
         '03-mandaps-and-canopies/02-red-and-yellow-mandap.jpg',
-        '02-stages/01-wedding-stage-with-anthurium-backdrop.jpg',
+        '02-stages/00-peach-drape-stage-with-floral-canopy.jpg',
+        '01-entrance-and-exterior/00-renovated-entrance-lit-for-an-evening-event.jpg',
         '03-mandaps-and-canopies/00-floral-arch-inside-the-hall.jpg',
-        '01-entrance-and-exterior/02-entrance-lit-for-a-wedding-night.jpg',
       ],
       faqs: [
         { q: 'বিয়েতে কতজন অতিথি ধরে?', a: 'দুই তলা মিলিয়ে ৩০০ জন পর্যন্ত, বা এক তলায় প্রায় ১৫০ জন।' },
@@ -249,9 +249,10 @@ const bn: Dict = {
         'লিফটে দাদু-দিদারা সহজেই দোতলায় পৌঁছে যান।',
       ],
       photos: [
-        '02-stages/06-birthday-stage-with-flower-arch.jpg',
-        '01-entrance-and-exterior/05-balloon-arch-for-a-birthday.jpg',
-        '04-halls-and-dining/04-hall-set-for-a-birthday-party.jpg',
+        '02-stages/00-first-birthday-balloon-backdrop.jpg',
+        '01-entrance-and-exterior/00-pink-balloon-arch-at-the-entrance.jpg',
+        '02-stages/00-pink-balloon-birthday-backdrop.jpg',
+        '02-stages/00-seventieth-birthday-sequin-backdrop.jpg',
       ],
       faqs: [
         { q: 'ছোট জন্মদিনের জন্য শুধু একটি তলা বুক করা যায়?', a: 'হ্যাঁ, প্রতি তলায় প্রায় ১৫০ জন অতিথি ধরে।' },
