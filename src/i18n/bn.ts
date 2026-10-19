@@ -327,15 +327,15 @@ const bn: Dict = {
       {
         id: 'ground-floor',
         title: 'একতলা',
-        photo: '04-halls-and-dining/01-hall-with-stage-set-up.jpg',
-        alt: 'একতলার হল, সামনে সাজানো মঞ্চ',
+        photo: '04-halls-and-dining/00-ground-floor-hall-with-glass-doors.jpg',
+        alt: 'একতলার হল, মার্বেলের প্যানেল, কাচের দরজা আর লাল-হলুদ পর্দা',
         body: 'প্রায় ১৫০ জনের একটি পুরো হল, যা দুই ভাগে ভাগ করা যায়, যাতে মঞ্চ আর খাওয়ার জায়গা আলাদা থাকে, বা একসঙ্গে দুটো ছোট অনুষ্ঠান হতে পারে।',
       },
       {
         id: 'first-floor',
         title: 'দোতলা',
-        photo: '04-halls-and-dining/00-round-tables-for-a-reception.jpg',
-        alt: 'রিসেপশনের জন্য সাজানো গোল টেবিল আর ঢাকা চেয়ার',
+        photo: '04-halls-and-dining/00-first-floor-hall-with-pillar.jpg',
+        alt: 'দোতলার হল, ঝাড়বাতি, থাম আর ইটের নকশার দেয়াল',
         body: 'প্রায় ১৫০ জনের হল, পাশে দুটি ঘর আর একটি কমন এরিয়া, যা পরিবারের পোশাক বদলানোর ঘর হিসেবে কাজে লাগে। একতলা থেকে লিফট ওঠে।',
       },
       {

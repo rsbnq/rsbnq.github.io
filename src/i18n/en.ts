@@ -332,15 +332,15 @@ const en = {
       {
         id: 'ground-floor',
         title: 'Ground floor',
-        photo: '04-halls-and-dining/01-hall-with-stage-set-up.jpg',
-        alt: 'The ground floor hall with a decorated stage at the far end',
+        photo: '04-halls-and-dining/00-ground-floor-hall-with-glass-doors.jpg',
+        alt: 'The ground floor hall with marble panelling, glass doors and red-and-yellow drapes',
         body: 'A full hall of about 150 guests that can be divided into two parts, so you can keep the stage and dining separate or run two smaller functions.',
       },
       {
         id: 'first-floor',
         title: 'First floor',
-        photo: '04-halls-and-dining/00-round-tables-for-a-reception.jpg',
-        alt: 'Round tables with covered chairs set for a reception',
+        photo: '04-halls-and-dining/00-first-floor-hall-with-pillar.jpg',
+        alt: 'The first floor hall with a chandelier, a pillar and a brick-pattern wall',
         body: 'A hall of about 150 guests with two rooms and a common area beside it, useful as changing rooms for the families. A lift goes up from the ground floor.',
       },
       {

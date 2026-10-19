@@ -327,15 +327,15 @@ const hi: Dict = {
       {
         id: 'ground-floor',
         title: 'ग्राउंड फ़्लोर',
-        photo: '04-halls-and-dining/01-hall-with-stage-set-up.jpg',
-        alt: 'ग्राउंड फ़्लोर का हॉल, सामने सजा हुआ स्टेज',
+        photo: '04-halls-and-dining/00-ground-floor-hall-with-glass-doors.jpg',
+        alt: 'ग्राउंड फ़्लोर का हॉल, संगमरमर के पैनल, काँच के दरवाज़े और लाल-पीले पर्दे',
         body: 'लगभग 150 मेहमानों का पूरा हॉल, जिसे दो हिस्सों में बाँटा जा सकता है, ताकि स्टेज और भोज अलग रहें या दो छोटे समारोह एक साथ हो सकें।',
       },
       {
         id: 'first-floor',
         title: 'पहली मंज़िल',
-        photo: '04-halls-and-dining/00-round-tables-for-a-reception.jpg',
-        alt: 'रिसेप्शन के लिए सजी गोल मेज़ें और ढकी कुर्सियाँ',
+        photo: '04-halls-and-dining/00-first-floor-hall-with-pillar.jpg',
+        alt: 'पहली मंज़िल का हॉल, झूमर, खंभा और ईंट जैसी दीवार',
         body: 'लगभग 150 मेहमानों का हॉल, साथ में दो कमरे और एक कॉमन एरिया, जो परिवारों के चेंजिंग रूम के काम आते हैं। ग्राउंड फ़्लोर से लिफ़्ट ऊपर जाती है।',
       },
       {
