@@ -1,0 +1,23 @@
+---
+// The red ribbon from the Ridhi Sidhi logo, carrying the venue's key facts.
+import type { Dict } from '../i18n';
+
+interface Props {
+  d: Dict;
+}
+
+const { d } = Astro.props;
+---
+
+<div class="ribbon-wrap wrap">
+  <dl class="ribbon">
+    {
+      d.ribbon.map((f) => (
+        <div>
+          <dt>{f.label}</dt>
+          <dd>{f.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>

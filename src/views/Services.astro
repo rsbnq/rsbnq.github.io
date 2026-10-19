@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Ribbon from '../components/Ribbon.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { t, type Lang } from '../i18n';
+import { photo } from '../lib/photos';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+---
+
+<Base lang={lang} route="/services" crumb={d.nav.services} title={d.meta.servicesTitle} description={d.meta.servicesDescription}>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>{d.services.title}</h1>
+      <p class="lede">{d.services.lede}</p>
+    </div>
+  </div>
+
+  <Ribbon d={d} />
+
+  <div class="wrap feature-list">
+    {
+      d.services.sections.map((s) => (
+        <section class="feature" aria-labelledby={s.id}>
+          <Image src={photo(s.photo).src} alt={s.alt} widths={[480, 800, 1200]} sizes="(min-width: 800px) 45vw, 100vw" />
+          <div>
+            <h2 id={s.id}>{s.title}</h2>
+            <p>{s.body}</p>
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="feature feature-plain" aria-labelledby="facilities">
+      <div>
+        <h2 id="facilities">{d.services.facilitiesTitle}</h2>
+        <ul class="ticks">
+          {d.amenities.map((a) => <li>{a}</li>)}
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="band band-rose">
+    <div class="wrap section">
+      <EnquiryForm d={d} lang={lang} heading={d.form.servicesHeading} />
+    </div>
+  </div>
+</Base>

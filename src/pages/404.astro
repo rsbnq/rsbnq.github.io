@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, localePath } from '../i18n';
+
+const d = t('en');
+---
+
+<Base lang="en" title={d.meta.notFoundTitle}>
+  <div class="page-head page-head-plain">
+    <div class="wrap">
+      <h1>{d.notFound.title}</h1>
+      <p class="lede">
+        {d.notFound.body} <a href={localePath('en', '/')}>{d.notFound.home}</a> {d.notFound.or}
+        <a href={localePath('en', '/contact')}>{d.notFound.contact}</a>.
+      </p>
+      <p lang="hi-IN">यह पेज मौजूद नहीं है। <a href="/hi/">होम पेज पर जाएँ</a></p>
+      <p lang="bn-IN">এই পাতাটি নেই। <a href="/bn/">হোম পেজে যান</a></p>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+
+# Local Claude Code tooling (skills, hooks), not part of the site
+.claude/
+skills-lock.json

@@ -1,0 +1,51 @@
+---
+// The Ridhi Sidhi mark, redrawn as vectors from the original sign artwork:
+// a yellow-edged red diamond carrying a white swastika, on a red ribbon.
+interface Props {
+  variant?: 'mark' | 'inline' | 'ribbon';
+  class?: string;
+}
+
+const { variant = 'inline', class: className } = Astro.props;
+---
+
+{
+  variant === 'mark' && (
+    <svg class:list={['logo-mark', className]} viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 3 Q84 15 97 50 Q84 85 50 97 Q16 85 3 50 Q16 15 50 3Z" fill="#e41b23" stroke="#fff200" stroke-width="6" />
+      <path d="M50 50V27H72M50 50H73V72M50 50V73H28M50 50H27V28" fill="none" stroke="#fff" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+
+{
+  variant === 'inline' && (
+    <span class:list={['logo-inline', className]}>
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 3 Q84 15 97 50 Q84 85 50 97 Q16 85 3 50 Q16 15 50 3Z" fill="#e41b23" stroke="#fff200" stroke-width="6" />
+        <path d="M50 50V27H72M50 50H73V72M50 50V73H28M50 50H27V28" fill="none" stroke="#fff" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="logo-words">
+        <span class="logo-name">Ridhi Sidhi</span>
+        <span class="logo-sub">Banquet</span>
+      </span>
+    </span>
+  )
+}
+
+{
+  variant === 'ribbon' && (
+    <svg class:list={['logo-ribbon', className]} viewBox="0 0 600 176" role="img" aria-label="Ridhi Sidhi Banquet">
+      <rect x="18" y="40" width="564" height="5" fill="#fff" />
+      <rect x="18" y="115" width="564" height="5" fill="#fff" />
+      <path d="M8 50H592L576 80L592 110H8L24 80Z" fill="#e41b23" />
+      <text x="158" y="94" text-anchor="middle" fill="#fff" font-family="Cinzel, 'Trajan Pro', Georgia, serif" font-weight="600" font-size="40" letter-spacing="2">RIDHI</text>
+      <text x="442" y="94" text-anchor="middle" fill="#fff" font-family="Cinzel, 'Trajan Pro', Georgia, serif" font-weight="600" font-size="40" letter-spacing="2">SIDHI</text>
+      <g transform="translate(244 24) scale(1.12)">
+        <path d="M50 3 Q84 15 97 50 Q84 85 50 97 Q16 85 3 50 Q16 15 50 3Z" fill="#e41b23" stroke="#fff200" stroke-width="6" />
+        <path d="M50 50V27H72M50 50H73V72M50 50V73H28M50 50H27V28" fill="none" stroke="#fff" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+      <text x="300" y="170" text-anchor="middle" fill="#fff" font-family="Cinzel, 'Trajan Pro', Georgia, serif" font-weight="500" font-size="26" letter-spacing="6">BANQUET</text>
+    </svg>
+  )
+}

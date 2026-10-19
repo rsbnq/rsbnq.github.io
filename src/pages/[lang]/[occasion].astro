@@ -1,0 +1,15 @@
+---
+import Occasion from '../../views/Occasion.astro';
+import { occasionKeys, occasionRoutes, type Lang, type OccasionKey } from '../../i18n';
+
+export function getStaticPaths() {
+  return (['hi', 'bn'] as const).flatMap((lang) =>
+    occasionKeys.map((key) => ({ params: { lang, occasion: occasionRoutes[key].slice(1) }, props: { key } })),
+  );
+}
+
+const lang = Astro.params.lang as Lang;
+const { key } = Astro.props as { key: OccasionKey };
+---
+
+<Occasion lang={lang} occasion={key} />

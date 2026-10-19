@@ -1,0 +1,36 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import { site, mapsLink, telLink } from '../config/site';
+import { whatsappLink } from '../lib/whatsapp';
+
+interface Props {
+  /** Pre-filled WhatsApp message in the page's language. */
+  waText: string;
+}
+
+const s = site.social as Record<keyof typeof site.social, string>;
+const all: { href: string; label: string; icon: IconName }[] = [
+  { href: whatsappLink(Astro.props.waText), label: 'WhatsApp', icon: 'whatsapp' },
+  { href: telLink, label: `Call ${site.phoneDisplay}`, icon: 'phone' },
+  { href: `mailto:${site.email}`, label: 'Email', icon: 'mail' },
+  { href: s.googleBusiness || mapsLink, label: 'Google Maps', icon: 'map' },
+  { href: s.instagram, label: 'Instagram', icon: 'instagram' },
+  { href: s.facebook, label: 'Facebook', icon: 'facebook' },
+  { href: s.youtube, label: 'YouTube', icon: 'youtube' },
+  { href: s.justdial, label: 'Justdial', icon: 'link' },
+  { href: s.linktree, label: 'All our links', icon: 'link' },
+];
+const links = all.filter((l) => l.href !== '');
+---
+
+<ul class="social" aria-label="Contact and social links">
+  {
+    links.map((l) => (
+      <li>
+        <a href={l.href} aria-label={l.label} title={l.label} rel={l.href.startsWith('http') ? 'me noopener' : undefined}>
+          <Icon name={l.icon} size={22} />
+        </a>
+      </li>
+    ))
+  }
+</ul>

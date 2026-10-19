@@ -1,0 +1,12 @@
+---
+import Home from '../../views/Home.astro';
+import type { Lang } from '../../i18n';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'hi' } }, { params: { lang: 'bn' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<Home lang={lang} />

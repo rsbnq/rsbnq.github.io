@@ -1,0 +1,27 @@
+---
+import { site, fullAddress, mapsLink, mapsEmbed, telLink } from '../config/site';
+import type { Dict } from '../i18n';
+
+interface Props {
+  d: Dict;
+}
+
+const { d } = Astro.props;
+---
+
+<section class="location" aria-labelledby="find-us">
+  <div>
+    <h2 id="find-us">{d.location.title}</h2>
+    <address>
+      <strong>{site.name}</strong><br />
+      {fullAddress}
+    </address>
+    <p>{d.landmark}</p>
+    <p><strong>{d.hours.label}:</strong> {d.hours.value}</p>
+    <p class="location-actions">
+      <a class="btn btn-solid" href={mapsLink}>{d.location.directions}</a>
+      <a class="text-link" href={telLink}>{d.location.lost} {site.phoneDisplay}</a>
+    </p>
+  </div>
+  <iframe src={mapsEmbed} title={`Map: ${site.name}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>

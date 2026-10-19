@@ -1,0 +1,154 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { t, type Lang } from '../i18n';
+import { whatsappLink } from '../lib/whatsapp';
+import { byCategory } from '../lib/photos';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+const g = d.gallery;
+
+// Photos come from src/assets/gallery/<section folder>/<caption>.jpg — see the README there.
+const groups = await Promise.all(
+  byCategory().map(async ([key, list]) => ({
+    key,
+    heading: g.categories[key] ?? list[0].category,
+    photos: await Promise.all(
+      list.map(async (p) => ({ ...p, large: (await getImage({ src: p.src, width: 1800, format: 'webp' })).src })),
+    ),
+  })),
+);
+const count = groups.reduce((n, group) => n + group.photos.length, 0);
+---
+
+<Base lang={lang} route="/gallery" crumb={d.nav.gallery} title={d.meta.galleryTitle} description={d.meta.galleryDescription}>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>{g.title}</h1>
+      <p class="lede">{g.lede}</p>
+      {
+        groups.length > 1 && (
+          <nav class="chips" aria-label={g.sectionsLabel}>
+            {groups.map((group) => (
+              <a href={`#${group.key}`}>{group.heading}</a>
+            ))}
+          </nav>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="wrap section gallery-sections">
+    {
+      count > 0 ? (
+        groups.map((group) => (
+          <section aria-labelledby={group.key}>
+            <h2 id={group.key}>{group.heading}</h2>
+            <ul class="gallery">
+              {group.photos.map((p) => {
+                const label = g.showCaptions ? p.caption : group.heading;
+                return (
+                  <li>
+                    <a href={p.large} data-lightbox data-caption={label}>
+                      <Image
+                        src={p.src}
+                        alt={`${label}, ${site.name}`}
+                        widths={[480, 800, 1200]}
+                        sizes="(min-width: 960px) 33vw, (min-width: 600px) 50vw, 100vw"
+                      />
+                    </a>
+                    {g.showCaptions && <p>{p.caption}</p>}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))
+      ) : (
+        <div class="empty">
+          <p>{g.empty}</p>
+          <a class="btn btn-wa btn-lg" href={whatsappLink(g.waMessage)}>
+            <Icon name="whatsapp" /> {g.askPhotos}
+          </a>
+        </div>
+      )
+    }
+
+    <div class="gallery-cta">
+      <div>
+        <p>{g.ctaText}</p>
+        <p class="follow-links">
+          {g.follow}
+          <a class="icon-link" href={site.social.instagram} rel="me noopener"><Icon name="instagram" size={18} /> Instagram</a>
+          {g.and}
+          <a class="icon-link" href={site.social.facebook} rel="me noopener"><Icon name="facebook" size={18} /> Facebook</a>
+        </p>
+      </div>
+      <a class="btn btn-wa btn-lg" href={whatsappLink(g.waMessage)}>
+        <Icon name="whatsapp" /> {g.message}
+      </a>
+    </div>
+  </div>
+
+  <dialog class="lightbox" aria-label={g.viewer}>
+    <figure>
+      <figcaption></figcaption>
+    </figure>
+    <button class="lb-btn lb-close" type="button" aria-label={g.close}>×</button>
+    <button class="lb-btn lb-prev" type="button" aria-label={g.prev}>‹</button>
+    <button class="lb-btn lb-next" type="button" aria-label={g.next}>›</button>
+  </dialog>
+</Base>
+
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]')];
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+
+  if (dialog && links.length) {
+    const caption = dialog.querySelector('figcaption')!;
+    const img = document.createElement('img');
+    caption.before(img);
+    let index = 0;
+
+    const show = (i: number) => {
+      index = (i + links.length) % links.length;
+      const link = links[index];
+      img.src = link.href;
+      img.alt = link.querySelector('img')?.alt ?? '';
+      caption.textContent = `${link.dataset.caption} · ${index + 1} / ${links.length}`;
+    };
+
+    links.forEach((link, i) =>
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        show(i);
+        dialog.showModal();
+      }),
+    );
+
+    dialog.querySelector('.lb-close')!.addEventListener('click', () => dialog.close());
+    dialog.querySelector('.lb-prev')!.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('.lb-next')!.addEventListener('click', () => show(index + 1));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+
+    let startX = 0;
+    dialog.addEventListener('touchstart', (e) => (startX = e.touches[0].clientX), { passive: true });
+    dialog.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+    });
+  }
+</script>

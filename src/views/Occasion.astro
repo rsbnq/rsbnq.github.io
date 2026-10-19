@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Ribbon from '../components/Ribbon.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import Location from '../components/Location.astro';
+import { site } from '../config/site';
+import { t, localePath, occasionKeys, occasionRoutes, type Lang, type OccasionKey } from '../i18n';
+import { photo } from '../lib/photos';
+
+interface Props {
+  lang: Lang;
+  occasion: OccasionKey;
+}
+
+const { lang, occasion } = Astro.props;
+const d = t(lang);
+const page = d.occasionPages[occasion];
+const route = occasionRoutes[occasion];
+const photos = page.photos.map(photo);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: page.serviceType,
+    name: page.title,
+    description: page.lede,
+    inLanguage: lang,
+    provider: { '@id': `${site.url}/#venue` },
+    areaServed: site.areaServed.map((name) => ({ '@type': 'Place', name })),
+    url: new URL(localePath(lang, route), site.url).href,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    mainEntity: page.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base lang={lang} route={route} title={page.metaTitle} description={page.metaDescription} crumb={page.nav} schema={schema}>
+  <div class="page-head">
+    <div class="wrap">
+      <h1>{page.title}</h1>
+      <p class="lede">{page.lede}</p>
+    </div>
+  </div>
+
+  <Ribbon d={d} />
+
+  <section class="wrap section split split-top" aria-labelledby="points">
+    <Image
+      class="split-photo"
+      src={photos[0].src}
+      alt={`${page.nav}, ${site.name}`}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 800px) 45vw, 100vw"
+      loading="eager"
+    />
+    <div>
+      <h2 id="points">{d.occasionUi.pointsTitle}</h2>
+      <ul class="ticks">
+        {page.points.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  {
+    photos.length > 1 && (
+      <section class="wrap section-tight" aria-labelledby="occasion-photos">
+        <h2 id="occasion-photos">{d.occasionUi.photosTitle}</h2>
+        <ul class="gallery">
+          {photos.slice(1).map((p) => (
+            <li>
+              <a href={localePath(lang, '/gallery')}>
+                <Image src={p.src} alt={`${page.nav}, ${site.name}`} widths={[480, 800]} sizes="(min-width: 960px) 33vw, (min-width: 600px) 50vw, 100vw" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <div class="band band-rose">
+    <div class="wrap section">
+      <EnquiryForm d={d} lang={lang} occasion={page.formOccasion} />
+    </div>
+  </div>
+
+  <section class="wrap section-tight" aria-labelledby="occasion-faq">
+    <h2 id="occasion-faq">{d.occasionUi.faqTitle}</h2>
+    <div class="faq">
+      {
+        page.faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <nav class="wrap section-tight other-occasions" aria-labelledby="others">
+    <h2 id="others">{d.occasionUi.others}</h2>
+    <ul class="chips chips-light">
+      {
+        occasionKeys
+          .filter((key) => key !== occasion)
+          .map((key) => (
+            <li>
+              <a href={localePath(lang, occasionRoutes[key])}>{d.occasionPages[key].nav}</a>
+            </li>
+          ))
+      }
+      <li><a href={localePath(lang, '/services')}>{d.nav.services}</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrap section">
+    <Location d={d} />
+  </div>
+</Base>

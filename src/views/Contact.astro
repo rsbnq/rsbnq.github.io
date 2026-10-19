@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import Location from '../components/Location.astro';
+import { site, telLink } from '../config/site';
+import { t, type Lang } from '../i18n';
+import { whatsappLink } from '../lib/whatsapp';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+---
+
+<Base lang={lang} route="/contact" crumb={d.nav.contact} title={d.meta.contactTitle} description={d.meta.contactDescription}>
+  <div class="page-head page-head-plain">
+    <div class="wrap">
+      <h1>{d.contact.title}</h1>
+      <ul class="contact-list">
+        <li><span>{d.contact.whatsapp}</span> <a href={whatsappLink(d.waDefault)}>{site.phoneDisplay}</a></li>
+        <li><span>{d.contact.phone}</span> <a href={telLink}>{site.phoneDisplay}</a></li>
+        <li><span>{d.hours.label}</span> <strong>{d.hours.value}</strong></li>
+        <li><span>{d.contact.email}</span> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><span>{d.contact.instagram}</span> <a href={site.social.instagram} rel="me noopener">@rsibanquet</a></li>
+        <li><span>{d.contact.facebook}</span> <a href={site.social.facebook} rel="me noopener">ridhisidhi.banquet</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="band band-rose">
+    <div class="wrap section">
+      <EnquiryForm d={d} lang={lang} />
+    </div>
+  </div>
+
+  <div class="wrap section">
+    <Location d={d} />
+  </div>
+</Base>

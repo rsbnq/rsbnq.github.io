@@ -1,0 +1,12 @@
+---
+import Occasion from '../views/Occasion.astro';
+import { occasionKeys, occasionRoutes, type OccasionKey } from '../i18n';
+
+export function getStaticPaths() {
+  return occasionKeys.map((key) => ({ params: { occasion: occasionRoutes[key].slice(1) }, props: { key } }));
+}
+
+const { key } = Astro.props as { key: OccasionKey };
+---
+
+<Occasion lang="en" occasion={key} />

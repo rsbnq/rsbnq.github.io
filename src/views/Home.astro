@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Ribbon from '../components/Ribbon.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import Faq from '../components/Faq.astro';
+import Location from '../components/Location.astro';
+import { site, telLink } from '../config/site';
+import { t, localePath, occasionRoutes, type Lang, type OccasionKey } from '../i18n';
+import { whatsappLink } from '../lib/whatsapp';
+import { photo } from '../lib/photos';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const d = t(lang);
+
+const hero = photo('01-entrance-and-exterior/00-entrance-decorated-with-flowers.jpg');
+const included = photo('04-halls-and-dining/05-buffet-counter.jpg');
+const preview = [
+  '02-stages/00-heart-stage-with-white-sofa.jpg',
+  '03-mandaps-and-canopies/01-white-flower-canopy.jpg',
+  '01-entrance-and-exterior/04-building-lit-up-for-a-wedding.jpg',
+  '05-flowers-and-details/01-marigold-and-gerbera-staircase.jpg',
+  '04-halls-and-dining/00-round-tables-for-a-reception.jpg',
+].map(photo);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: d.faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base lang={lang} route="/" title={d.meta.homeTitle} schema={[faqSchema]}>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1>{d.hero.title}</h1>
+        <p class="hero-line">{d.hero.line}</p>
+        <div class="hero-actions">
+          <a class="btn btn-wa btn-lg" href={whatsappLink(d.waDefault)}><Icon name="whatsapp" /> {d.hero.ask}</a>
+          <a class="btn btn-ghost btn-lg" href={telLink}><Icon name="phone" /> {site.phoneDisplay}</a>
+        </div>
+      </div>
+      <div class="hero-photos">
+        <Image
+          class="hero-main"
+          src={hero.src}
+          alt={d.hero.photoAlt}
+          widths={[640, 960, 1400]}
+          sizes="(min-width: 900px) 55vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <Ribbon d={d} />
+
+  <section class="wrap section" aria-labelledby="occasions">
+    <div class="section-head">
+      <h2 id="occasions">{d.occasionsHead.title}</h2>
+      <p>{d.occasionsHead.sub}</p>
+    </div>
+    <ul class="occasions">
+      {
+        d.occasions.map((o) => (
+          <li>
+            <a href={localePath(lang, occasionRoutes[o.page as OccasionKey])}>
+              <Image src={photo(o.photo).src} alt={o.name} widths={[400, 700]} sizes="(min-width: 860px) 33vw, (min-width: 520px) 50vw, 100vw" />
+              <strong>{o.name}</strong>
+              <span>{o.detail}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <div class="band band-rose">
+  <section class="wrap section split" aria-labelledby="included">
+    <Image
+      class="split-photo"
+      src={included.src}
+      alt={d.included.photoAlt}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 800px) 45vw, 100vw"
+    />
+    <div>
+      <h2 id="included">{d.included.title}</h2>
+      <p class="lede">{d.included.lede}</p>
+      <ul class="ticks">
+        {d.amenities.map((a) => <li>{a}</li>)}
+      </ul>
+      <p><a class="text-link" href={localePath(lang, '/services')}>{d.included.link}</a></p>
+    </div>
+  </section>
+  </div>
+
+  <section class="wrap section" aria-labelledby="photos">
+    <div class="section-head">
+      <h2 id="photos">{d.photos.title}</h2>
+      <p class="follow-links">
+        <a class="text-link" href={localePath(lang, '/gallery')}>{d.photos.all}</a>
+        <a class="text-link icon-link" href={site.social.instagram} rel="me noopener"><Icon name="instagram" size={18} /> Instagram</a>
+        <a class="text-link icon-link" href={site.social.facebook} rel="me noopener"><Icon name="facebook" size={18} /> Facebook</a>
+      </p>
+    </div>
+    <ul class="mosaic">
+      {
+        preview.map((p, i) => (
+          <li>
+            <a href={localePath(lang, '/gallery')}>
+              <Image src={p.src} alt={d.gallery.showCaptions ? p.caption : (d.gallery.categories[p.categoryKey] ?? p.caption)} widths={[400, 800, 1200]} sizes={i === 0 ? '(min-width: 700px) 50vw, 100vw' : '(min-width: 700px) 25vw, 50vw'} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="band band-dark jali" aria-labelledby="how">
+    <div class="wrap section">
+      <h2 id="how">{d.how.title}</h2>
+      <ol class="steps">
+        {
+          d.how.steps.map((s) => (
+            <li>
+              <strong>{s.title}</strong>
+              <span>{s.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <div class="band band-rose">
+    <div class="wrap section">
+      <EnquiryForm d={d} lang={lang} />
+    </div>
+  </div>
+
+  <div class="wrap section">
+    <Faq d={d} />
+  </div>
+
+  <div class="wrap section">
+    <Location d={d} />
+  </div>
+</Base>

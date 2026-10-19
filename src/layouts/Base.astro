@@ -1,0 +1,222 @@
+---
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import { site, sameAs, fullAddress, mapsLink, telLink } from '../config/site';
+import { t, locales, localeInfo, localePath, occasionKeys, occasionRoutes, type Lang, type Route } from '../i18n';
+import { whatsappLink } from '../lib/whatsapp';
+import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
+import Social from '../components/Social.astro';
+import logo from '../assets/brand/logo.png';
+
+interface Props {
+  lang: Lang;
+  /** The page in language-neutral form, for canonical and hreflang links. Omit on the 404 page. */
+  route?: Route;
+  title: string;
+  description?: string;
+  /** Extra JSON-LD objects for this page (FAQ, service…). */
+  schema?: Record<string, unknown>[];
+  /** Short page name for the breadcrumb trail; omit on the home page. */
+  crumb?: string;
+}
+
+const { lang, route, title, schema = [], crumb } = Astro.props;
+const d = t(lang);
+const description = Astro.props.description ?? d.meta.description;
+const abs = (path: string) => new URL(path, site.url).href;
+const canonical = route ? abs(localePath(lang, route)) : undefined;
+const ogImage = abs('/og.png');
+const logoUrl = abs((await getImage({ src: logo, width: 600, format: 'png' })).src);
+
+const nav: { route: Route; label: string }[] = [
+  { route: '/', label: d.nav.home },
+  { route: '/services', label: d.nav.services },
+  { route: '/gallery', label: d.nav.gallery },
+  { route: '/contact', label: d.nav.contact },
+];
+
+// Bengali and Hindi need fonts with their scripts; Cinzel stays for the logo wordmark.
+const fonts = {
+  en: 'family=Cinzel:wght@500;600;700&family=Mukta:wght@400;600;700',
+  hi: 'family=Cinzel:wght@600;700&family=Mukta:wght@400;600;700&family=Rozha+One',
+  bn: 'family=Cinzel:wght@600;700&family=Hind+Siliguri:wght@400;600;700&family=Tiro+Bangla',
+}[lang];
+
+const venue = {
+  '@context': 'https://schema.org',
+  '@type': ['EventVenue', 'LocalBusiness'],
+  '@id': `${site.url}/#venue`,
+  name: site.name,
+  alternateName: site.alternateName,
+  description: t('en').meta.description,
+  url: site.url,
+  logo: logoUrl,
+  image: ogImage,
+  telephone: `+${site.phone}`,
+  email: site.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.locality,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  ...(site.geo && {
+    geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  }),
+  hasMap: mapsLink,
+  areaServed: site.areaServed.map((name) => ({ '@type': 'Place', name })),
+  maximumAttendeeCapacity: site.capacity.total,
+  amenityFeature: t('en').amenities.map((name) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
+  availableLanguage: ['English', 'Hindi', 'Bengali'],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: site.hours.opens,
+    closes: site.hours.closes,
+  },
+  ...(sameAs.length > 0 && { sameAs }),
+};
+
+const breadcrumbs =
+  route && crumb
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: d.nav.home, item: abs(localePath(lang, '/')) },
+          { '@type': 'ListItem', position: 2, name: crumb, item: canonical },
+        ],
+      }
+    : null;
+const jsonLd = [venue, ...(breadcrumbs ? [breadcrumbs] : []), ...schema];
+---
+
+<!doctype html>
+<html lang={localeInfo[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+    {
+      route &&
+        locales.map((l) => <link rel="alternate" hreflang={localeInfo[l].htmlLang} href={abs(localePath(l, route))} />)
+    }
+    {route && <link rel="alternate" hreflang="x-default" href={abs(localePath('en', route))} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text facts for AI assistants" />
+    <meta name="theme-color" content="#3c0005" />
+
+    <meta name="geo.region" content={site.address.regionCode} />
+    <meta name="geo.placename" content={`Bangur Avenue, ${site.address.locality}`} />
+    {site.geo && <meta name="geo.position" content={`${site.geo.lat};${site.geo.lng}`} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={localeInfo[lang].og} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={`https://fonts.googleapis.com/css2?${fonts}&display=swap`} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">{d.skip}</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href={localePath(lang, '/')} aria-label={site.name}>
+          <Logo variant="inline" />
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            {
+              nav.map((item) => (
+                <li>
+                  <a href={localePath(lang, item.route)} aria-current={route === item.route ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <ul class="lang-switch" aria-label={d.language}>
+          {
+            locales.map((l) => (
+              <li>
+                <a
+                  href={localePath(l, route ?? '/')}
+                  hreflang={localeInfo[l].htmlLang}
+                  lang={localeInfo[l].htmlLang}
+                  aria-current={l === lang ? 'true' : undefined}
+                  aria-label={localeInfo[l].label}
+                >
+                  <span class="lang-full">{localeInfo[l].label}</span>
+                  <span class="lang-short" aria-hidden="true">{localeInfo[l].short}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="header-cta" href={whatsappLink(d.waDefault)}><Icon name="whatsapp" size={18} /> {site.phoneDisplay}</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <Logo variant="ribbon" />
+          <address>
+            {fullAddress}<br />
+            {d.landmark}
+          </address>
+        </div>
+        <div>
+          <p class="footer-heading">{d.footer.contact}</p>
+          <p><a href={telLink}>{site.phoneDisplay}</a></p>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          <p><a href={mapsLink}>{d.footer.directions}</a></p>
+          <p>{d.hours.label}: {d.hours.value}</p>
+          <Social waText={d.waDefault} />
+        </div>
+        <div>
+          <p class="footer-heading">{d.footer.occasions}</p>
+          {
+            occasionKeys.map((key) => (
+              <p><a href={localePath(lang, occasionRoutes[key])}>{d.occasionPages[key].nav}</a></p>
+            ))
+          }
+        </div>
+        <div>
+          <p class="footer-heading">{d.footer.pages}</p>
+          {nav.map((item) => <p><a href={localePath(lang, item.route)}>{item.label}</a></p>)}
+        </div>
+      </div>
+      <p class="wrap footer-copy">© {new Date().getFullYear()} {site.name}, {d.footer.place}</p>
+    </footer>
+
+    <div class="contact-bar" aria-label={d.contact.title}>
+      <a class="btn btn-call" href={telLink}><Icon name="phone" /> {d.bar.call}</a>
+      <a class="btn btn-wa" href={whatsappLink(d.waDefault)}><Icon name="whatsapp" /> {d.bar.whatsapp}</a>
+    </div>
+  </body>
+</html>

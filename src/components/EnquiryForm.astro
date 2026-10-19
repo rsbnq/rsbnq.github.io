@@ -1,0 +1,148 @@
+---
+import { site, telLink } from '../config/site';
+import { localeInfo, type Dict, type Lang } from '../i18n';
+import { whatsappLink } from '../lib/whatsapp';
+import Icon from './Icon.astro';
+
+interface Props {
+  d: Dict;
+  lang: Lang;
+  heading?: string;
+  /** Occasion to preselect, e.g. on the weddings page. */
+  occasion?: string;
+}
+
+const { d, lang, heading = d.form.heading, occasion } = Astro.props;
+const f = d.form;
+const strings = { ...f.msg, errName: f.errName, errOccasion: f.errOccasion, errBoth: f.errBoth };
+---
+
+<section class="enquiry" id="enquire" aria-labelledby="enquire-heading">
+  <div class="enquiry-intro">
+    <h2 id="enquire-heading">{heading}</h2>
+    <p>{f.intro}</p>
+    <p class="enquiry-alt">
+      {f.callPrompt} <a href={telLink}>{site.phoneDisplay}</a>
+    </p>
+  </div>
+
+  <form
+    class="enquiry-form"
+    data-whatsapp={site.whatsapp}
+    data-locale={localeInfo[lang].htmlLang}
+    data-strings={JSON.stringify(strings)}
+    novalidate
+  >
+    <label>
+      <span>{f.name}</span>
+      <input name="name" autocomplete="name" required />
+    </label>
+
+    <label>
+      <span>{f.occasion}</span>
+      <select name="occasion" required>
+        <option value="">{f.choose}</option>
+        {d.occasions.map((o) => <option selected={o.name === occasion}>{o.name}</option>)}
+        <option>{f.other}</option>
+      </select>
+    </label>
+
+    <div class="field-row">
+      <label>
+        <span>{f.date}</span>
+        <input type="date" name="date" />
+      </label>
+      <label>
+        <span>{f.session}</span>
+        <select name="session">
+          <option value="">{f.either}</option>
+          <option>{f.lunch}</option>
+          <option>{f.dinner}</option>
+        </select>
+      </label>
+    </div>
+
+    <label>
+      <span>{f.guests}</span>
+      <select name="guests">
+        <option value="">{f.guestsChoose}</option>
+        {f.guestRanges.map((g) => <option>{g}</option>)}
+      </select>
+    </label>
+
+    <label>
+      <span>{f.note} <small>{f.optional}</small></span>
+      <textarea name="message" rows="3" placeholder={f.placeholder}></textarea>
+    </label>
+
+    <p class="form-error" role="alert" hidden></p>
+
+    <button type="submit" class="btn btn-wa btn-lg"><Icon name="whatsapp" /> {f.submit}</button>
+    <noscript>
+      <a class="btn btn-wa btn-lg" href={whatsappLink(d.waDefault)}>{f.openWhatsapp}</a>
+    </noscript>
+  </form>
+</section>
+
+<script>
+  interface Strings {
+    hello: string;
+    name: string;
+    occasion: string;
+    date: string;
+    session: string;
+    guests: string;
+    note: string;
+    errName: string;
+    errOccasion: string;
+    errBoth: string;
+  }
+
+  document.querySelectorAll<HTMLFormElement>('.enquiry-form').forEach((form) => {
+    const s: Strings = JSON.parse(form.dataset.strings!);
+    const locale = form.dataset.locale!;
+
+    const formatDate = (iso: string) =>
+      new Date(`${iso}T00:00:00`).toLocaleDateString(locale, {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
+
+    const dateInput = form.querySelector<HTMLInputElement>('input[name="date"]');
+    const now = new Date();
+    if (dateInput) dateInput.min = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+    // Links like /contact?occasion=Wedding preselect the occasion.
+    const preset = new URLSearchParams(location.search).get('occasion');
+    const occasion = form.querySelector<HTMLSelectElement>('select[name="occasion"]');
+    if (preset && occasion && [...occasion.options].some((o) => o.value === preset)) occasion.value = preset;
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const get = (key: string) => String(data.get(key) ?? '').trim();
+      const error = form.querySelector<HTMLElement>('.form-error')!;
+
+      if (!get('name') || !get('occasion')) {
+        error.textContent = !get('name') && !get('occasion') ? s.errBoth : !get('name') ? s.errName : s.errOccasion;
+        error.hidden = false;
+        form.querySelector<HTMLElement>(get('name') ? 'select[name="occasion"]' : 'input[name="name"]')?.focus();
+        return;
+      }
+      error.hidden = true;
+
+      const lines = [s.hello, '', `${s.name}: ${get('name')}`, `${s.occasion}: ${get('occasion')}`];
+      if (get('date')) lines.push(`${s.date}: ${formatDate(get('date'))}${get('session') ? ` (${get('session')})` : ''}`);
+      else if (get('session')) lines.push(`${s.session}: ${get('session')}`);
+      if (get('guests')) lines.push(`${s.guests}: ${get('guests')}`);
+      if (get('message')) lines.push(`${s.note}: ${get('message')}`);
+
+      const url = `https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
+      const opened = window.open(url, '_blank');
+      if (opened) opened.opener = null;
+      else location.href = url;
+    });
+  });
+</script>
