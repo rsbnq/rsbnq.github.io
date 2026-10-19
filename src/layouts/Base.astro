@@ -26,7 +26,8 @@ const d = t(lang);
 const description = Astro.props.description ?? d.meta.description;
 const abs = (path: string) => new URL(path, site.url).href;
 const canonical = route ? abs(localePath(lang, route)) : undefined;
-const ogImage = abs('/og.png');
+// Each page has its own share image, e.g. /og/weddings.png; see src/pages/og/[page].png.ts.
+const ogImage = abs(`/og/${!route || route === '/' ? 'home' : route.slice(1)}.png`);
 const logoUrl = abs((await getImage({ src: logo, width: 600, format: 'png' })).src);
 
 const nav: { route: Route; label: string }[] = [
@@ -107,7 +108,9 @@ const jsonLd = [venue, ...(breadcrumbs ? [breadcrumbs] : []), ...schema];
         locales.map((l) => <link rel="alternate" hreflang={localeInfo[l].htmlLang} href={abs(localePath(l, route))} />)
     }
     {route && <link rel="alternate" hreflang="x-default" href={abs(localePath('en', route))} />}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -127,6 +130,7 @@ const jsonLd = [venue, ...(breadcrumbs ? [breadcrumbs] : []), ...schema];
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name}, banquet hall in Bangur Avenue, Kolkata`} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

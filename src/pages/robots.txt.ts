@@ -2,7 +2,21 @@ import type { APIRoute } from 'astro';
 import { site } from '../config/site';
 
 // Search engines and AI assistants are all welcome: being quoted in answers brings enquiries.
-const aiCrawlers = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended', 'Bingbot'];
+const aiCrawlers = [
+  'GPTBot',
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'ClaudeBot',
+  'Claude-SearchBot',
+  'Claude-User',
+  'Claude-Web',
+  'PerplexityBot',
+  'Perplexity-User',
+  'Google-Extended',
+  'Applebot-Extended',
+  'Bingbot',
+  'CCBot',
+];
 
 export const GET: APIRoute = () =>
   new Response(
